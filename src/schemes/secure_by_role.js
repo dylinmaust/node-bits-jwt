@@ -26,7 +26,7 @@ export const secureByRole = config => (req, token) => {
 
   // map the current roles onto the auth graph against the current verb
   const result = _.map(roles, r => {
-    const def = map[r.toLowerCase()];
+    const def = map[r.toLowerCase()] || map[r];
     const verbs = _.find(def, (verbs, key) => murl(key)(url) !== null) || [];
     return isWildcard(def) || _.map(verbs, v => v.toLowerCase()).includes(method.toLowerCase());
   })
